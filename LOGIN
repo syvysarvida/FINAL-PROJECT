@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <conio.h> 
+
+void mainMenu();
+
+int checkCredentials(char *username, char *password)
+{
+    
+    if (strcmp(username, "user") == 0 && strcmp(password, "password") == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void logIn()
+{
+    char username[50];
+    char password[50];
+    int i = 0;
+    char ch;
+
+    printf("Enter your username: ");
+    scanf("%s", username);
+
+    printf("Enter your password: ");
+
+    while (1)
+    {
+        ch = getch();
+
+        if (ch == '\r')
+        {
+            password[i] = '\0';
+            break;
+        }
+        else if (ch == '\b')
+        {
+            if (i > 0)
+            {
+                i--;
+                printf("\b \b");
+            }
+        }
+        else
+        {
+            password[i++] = ch;
+            printf("*");
+        }
+    }
+
+    if (checkCredentials(username, password))
+    {
+        printf("\nLog in successful.\n");
+        mainMenu();
+    }
+    else
+    {
+        printf("\nLog in failed. \nInvalid username or password.\n");
+        printf("Press any Key to Try Again");
+        getch();
+
+        system("cls");
+        logIn();
+    }
+}
+int main()
+{
+    logIn();
+    mainMenu();
+    return 1;
+}
+
+void mainMenu()
+{
+    printf("here");
+}
